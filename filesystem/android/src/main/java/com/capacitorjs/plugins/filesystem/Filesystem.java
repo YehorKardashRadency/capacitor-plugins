@@ -210,10 +210,10 @@ public class Filesystem {
                 return c.getCacheDir();
             case "EXTERNAL":
                 var dirs = c.getExternalFilesDirs(null);
-                // return emulated sdcard
-                if(dirs.length < 2) return dirs[0];
                 // return real sdcard
-                else return dirs[1];
+                if(dirs.length > 1 && dirs[1]!=null) return dirs[1];
+                // return emulated sdcard
+                else return c.getExternalFilesDir(null);
             case "EXTERNAL_STORAGE":
                 return Environment.getExternalStorageDirectory();
         }
