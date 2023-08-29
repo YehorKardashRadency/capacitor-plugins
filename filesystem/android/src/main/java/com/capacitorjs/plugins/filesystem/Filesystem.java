@@ -209,7 +209,11 @@ public class Filesystem {
             case "CACHE":
                 return c.getCacheDir();
             case "EXTERNAL":
-                return c.getExternalFilesDir(null);
+                var dirs = c.getExternalFilesDirs(null);
+                // return emulated sdcard
+                if(dirs.length < 2) return dirs[0];
+                // return real sdcard
+                else return dirs[1];
             case "EXTERNAL_STORAGE":
                 return Environment.getExternalStorageDirectory();
         }
